@@ -1,3 +1,4 @@
 python-pptx==0.6.18
 ghostscript==0.7
 camelot-py[cv]==0.8.2
+requests==2.25.1
