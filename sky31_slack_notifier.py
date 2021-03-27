@@ -11,7 +11,7 @@ if __name__ == '__main__':
         exit(0)
 
     today = date.today()
-    message = f':lwt: 오늘의 SKY 31 점심메뉴 - {today.year}년 {today.month}월 {today.day}일 :lwt:'
+    message = f'오늘의 SKY 31 점심메뉴 - {today.year}년 {today.month}월 {today.day}일'
     for menu in today_menu:
         message += f'\n> {menu.menu} ({menu.price:,d}원)'
 

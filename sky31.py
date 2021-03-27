@@ -30,35 +30,22 @@ class SKY31:
         return self._loader.get_monthly_menus()
 
 
+def print_monthly_menus(year: int, month: int):
+    monthly_menu = SKY31(year=year, month=month).get_monthly_menus()
+    print(f'========= {year}년 {month}월 =========')
+    for m in monthly_menu:
+        print(f'{year}년 {month}월 {m.nth_day}일 {m.menu} ({m.price:,d}원)')
+
+
 if __name__ == '__main__':
     today_menu = SKY31().get_today_menus()
-    print(date.today().strftime("오늘의 SKY 31 점심메뉴 - %Y년 %m월 %d일"
-                                .encode('unicode-escape').decode())
-          .encode().decode('unicode-escape'))
+    print('오늘의 SKY 31 점심메뉴')
     for menu in today_menu:
         print(f'{menu.menu} ({menu.price:,d}원)')
 
-    monthly_menu = SKY31(year=2020, month=12).get_monthly_menus()
-    print('========= 2020 12 =========')
-    for m in monthly_menu:
-        print(f'12월 {m.nth_day}일 {m.menu} ({m.price:,d}원)')
-
-    monthly_menu = SKY31(year=2021, month=1).get_monthly_menus()
-    print('========= 2021 01 =========')
-    for m in monthly_menu:
-        print(f'1월 {m.nth_day}일 {m.menu} ({m.price:,d}원)')
-
-    monthly_menu = SKY31(year=2021, month=2).get_monthly_menus()
-    print('========= 2021 02 =========')
-    for m in monthly_menu:
-        print(f'2월 {m.nth_day}일 {m.menu} ({m.price:,d}원)')
-
-    monthly_menu = SKY31(year=2021, month=3).get_monthly_menus()
-    print('========= 2021 03 =========')
-    for m in monthly_menu:
-        print(f'3월 {m.nth_day}일 {m.menu} ({m.price:,d}원)')
-
-    monthly_menu = SKY31(year=2021, month=4).get_monthly_menus()
-    print('========= 2021 04 =========')
-    for m in monthly_menu:
-        print(f'4월 {m.nth_day}일 {m.menu} ({m.price:,d}원)')
+    print_monthly_menus(2020, 10)
+    print_monthly_menus(2020, 11)
+    print_monthly_menus(2020, 12)
+    print_monthly_menus(2021, 1)
+    print_monthly_menus(2021, 2)
+    print_monthly_menus(2021, 3)

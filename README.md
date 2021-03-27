@@ -9,13 +9,14 @@
 2021년 3월 메뉴라면, `202103.pptx` 혹은 `202103.pdf` 파일로 저장하고 아래 코드 사용
 
 ```python
+# 오늘의 메뉴 얻기
 SKY31().get_today_menus()
 
 # 오늘의 메뉴 출력 예시
 today_menu = SKY31().get_today_menus()
-print(date.today().strftime("%Y년 %m월 %d일 SKY 31 점심메뉴"))
-for menu in today_menu:
-    print(f'{menu.menu} ({menu.price:,d}원)')
+    print('오늘의 SKY 31 점심메뉴')
+    for menu in today_menu:
+        print(f'{menu.menu} ({menu.price:,d}원)')
 
 # 월간 메뉴 얻기
 SKY31().get_monthly_menus()
