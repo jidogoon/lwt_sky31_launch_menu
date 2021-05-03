@@ -40,8 +40,8 @@ def print_monthly_menus(year: int, month: int):
 if __name__ == '__main__':
     today_menu = SKY31().get_today_menus()
     print('오늘의 SKY 31 점심메뉴')
-    for menu in today_menu:
-        print(f'{menu.menu} ({menu.price:,d}원)')
+    for index, menu in enumerate(today_menu):
+        print(f'> {index + 1}. {menu.menu} ({menu.price:,d}원)')
 
     print_monthly_menus(2020, 10)
     print_monthly_menus(2020, 11)
@@ -50,3 +50,4 @@ if __name__ == '__main__':
     print_monthly_menus(2021, 2)
     print_monthly_menus(2021, 3)
     print_monthly_menus(2021, 4)
+    print_monthly_menus(2021, 5)

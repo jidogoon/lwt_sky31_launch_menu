@@ -12,8 +12,8 @@ if __name__ == '__main__':
 
     today = date.today()
     message = f'오늘의 SKY 31 점심메뉴 - {today.year}년 {today.month}월 {today.day}일'
-    for menu in today_menu:
-        message += f'\n> {menu.menu} ({menu.price:,d}원)'
+    for index, menu in enumerate(today_menu):
+        message += f'\n> {index + 1}. {menu.menu} ({menu.price:,d}원)'
 
     hook_urls = FileReader('hook_url.conf', default_value=None).read_lines()
     for hook_url in hook_urls:
