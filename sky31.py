@@ -51,3 +51,4 @@ if __name__ == '__main__':
     print_monthly_menus(2021, 3)
     print_monthly_menus(2021, 4)
     print_monthly_menus(2021, 5)
+    print_monthly_menus(2021, 6)
