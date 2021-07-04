@@ -34,21 +34,17 @@ def print_monthly_menus(year: int, month: int):
     monthly_menu = SKY31(year=year, month=month).get_monthly_menus()
     print(f'========= {year}년 {month}월 =========')
     for m in monthly_menu:
-        print(f'{year}년 {month}월 {m.nth_day}일 {m.menu} ({m.price:,d}원)')
+        price_text = f'?' if m.price is None else f'{m.price:,d}'
+        print(f'{year}년 {month}월 {m.nth_day}일 {m.menu} ({price_text}원)')
 
 
 if __name__ == '__main__':
     today_menu = SKY31().get_today_menus()
     print('오늘의 SKY 31 점심메뉴')
-    for index, menu in enumerate(today_menu):
-        print(f'> {index + 1}. {menu.menu} ({menu.price:,d}원)')
-
-    print_monthly_menus(2020, 10)
-    print_monthly_menus(2020, 11)
-    print_monthly_menus(2020, 12)
-    print_monthly_menus(2021, 1)
-    print_monthly_menus(2021, 2)
-    print_monthly_menus(2021, 3)
-    print_monthly_menus(2021, 4)
-    print_monthly_menus(2021, 5)
-    print_monthly_menus(2021, 6)
+    if len(today_menu) > 0:
+        index = 0
+        for menu in filter(lambda m: m.price is not None, today_menu):
+            print(f'> {index + 1}. {menu.menu} ({menu.price:,d}원)')
+            index += 1
+        print(f'> {str(index + 1)}. ' + '/'.join(map(lambda m: m.menu, filter(lambda m: m.price is None, today_menu))))
+    print_monthly_menus(2021, 7)

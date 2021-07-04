@@ -41,16 +41,18 @@ class SKY31PPTX(SKY31ABC):
         return c_index < 1 or self._is_holiday_cell(cell)
 
     def _find_menu(self, c_index: int, cell: _Cell, r_index: int, table: Table):
-        for i in range(1, 4):
+        for i in range(1, 5):
             current_cell = table.rows[r_index + i].cells[c_index]
-            if None is Util.only_num(current_cell.text):
-                continue
             menu_text = current_cell.text.replace('\x0b', '\n').strip()
             if '' is menu_text:
                 continue
             nth_day = Util.only_num(cell.text)
-            menu_text = menu_text.replace('\n', '').replace(')', ')\n').strip()
-            menu_text_spt = self._reduce_malformed_menu(menu_text).split('\n')
+            if Util.only_num(menu_text) is None:
+                menu_text = menu_text.strip()
+                menu_text_spt = '\n'.join(map(lambda m: f'{m}\n(?)', menu_text.split('\n'))).split()
+            else:
+                menu_text = menu_text.replace('\n', '').replace(')', ')\n').strip()
+                menu_text_spt = self._reduce_malformed_menu(menu_text).split('\n')
             self._append_menu(menu_text_spt, nth_day)
             if len(menu_text_spt) > 3:
                 self._append_menu(menu_text_spt, nth_day, moremenu=True)
@@ -78,12 +80,11 @@ class SKY31PPTX(SKY31ABC):
 
     def _append_menu(self, menu_text_spt: [], nth_day: int, moremenu: bool = False):
         offset = 2 if moremenu else 0
-        price = Util.only_num(menu_text_spt[1 + offset])
-        if None is price:
+        if len(menu_text_spt) <= (1 + offset):
             return
         self._menus.append(MenuData(nth_day=nth_day,
                                     menu=menu_text_spt[0 + offset],
-                                    price=price))
+                                    price=Util.only_num(menu_text_spt[1 + offset])))
 
     def _is_holiday_cell(self, cell: _Cell):
         for prg in cell.text_frame.paragraphs:
