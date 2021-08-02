@@ -41,7 +41,7 @@ class SKY31PPTX(SKY31ABC):
         return c_index < 1 or self._is_holiday_cell(cell)
 
     def _find_menu(self, c_index: int, cell: _Cell, r_index: int, table: Table):
-        for i in range(1, 5):
+        for i in range(1, 6):
             current_cell = table.rows[r_index + i].cells[c_index]
             menu_text = current_cell.text.replace('\x0b', '\n').strip()
             if '' is menu_text:
@@ -49,7 +49,7 @@ class SKY31PPTX(SKY31ABC):
             nth_day = Util.only_num(cell.text)
             if Util.only_num(menu_text) is None:
                 menu_text = menu_text.strip()
-                menu_text_spt = '\n'.join(map(lambda m: f'{m}\n(?)', menu_text.split('\n'))).split()
+                menu_text_spt = [menu_text.replace('\n', ''), '']
             else:
                 menu_text = menu_text.replace('\n', '').replace(')', ')\n').strip()
                 menu_text_spt = self._reduce_malformed_menu(menu_text).split('\n')

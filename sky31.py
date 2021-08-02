@@ -47,4 +47,4 @@ if __name__ == '__main__':
             print(f'> {index + 1}. {menu.menu} ({menu.price:,d}원)')
             index += 1
         print(f'> {str(index + 1)}. ' + '/'.join(map(lambda m: m.menu, filter(lambda m: m.price is None, today_menu))))
-    print_monthly_menus(2021, 7)
+    print_monthly_menus(2021, 8)
